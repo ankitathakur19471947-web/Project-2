@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood-Based Recommender</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+      transition: background-color 0.5s;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .quote-box {
+      font-size: 1.2em;
+      margin: 30px auto;
+      width: 60%;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .music-link {
+      font-size: 1.1em;
+      margin-top: 20px;
+    }
+
+    .happy { background-color: #fef08a; }
+    .sad { background-color: #cbd5e1; }
+    .angry { background-color: #fca5a5; }
+    .neutral { background-color: #e0f2fe; }
+  </style>
+</head>
+<body>
+
+  <h1>🎵 Mood-Based Recommender</h1>
+
+  <label for="mood">Select your mood:</label>
+  <select id="mood" onchange="showRecommendation()">
+    <option value="">--Choose--</option>
+    <option value="happy">Happy 😊</option>
+    <option value="sad">Sad 😢</option>
+    <option value="angry">Angry 😡</option>
+    <option value="neutral">Neutral 😐</option>
+  </select>
+
+  <div class="quote-box" id="quoteBox">Your quote will appear here.</div>
+  <div class="music-link" id="musicLink"></div>
+
+  <script>
+    const quotes = {
+      happy: "Keep smiling, life is beautiful!",
+      sad: "It's okay to feel down. Brighter days are ahead.",
+      angry: "Breathe. Let go of what you can’t control.",
+      neutral: "Every moment is a fresh beginning."
+    };
+
+    const music = {
+      happy: "https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC",
+      sad: "https://open.spotify.com/playlist/37i9dQZF1DWVrtsSlLKzro",
+      angry: "https://open.spotify.com/playlist/37i9dQZF1DWTcqUzwhNmKv",
+      neutral: "https://open.spotify.com/playlist/37i9dQZF1DX4WYpdgoIcn6"
+    };
+
+    function showRecommendation() {
+      const mood = document.getElementById("mood").value;
+      const quoteBox = document.getElementById("quoteBox");
+      const musicLink = document.getElementById("musicLink");
+
+      if (mood) {
+        document.body.className = mood;
+        quoteBox.textContent = quotes[mood];
+        musicLink.innerHTML = `🎧 <a href="${music[mood]}" target="_blank">Listen to a ${mood} playlist</a>`;
+      } else {
+        quoteBox.textContent = "Your quote will appear here.";
+        musicLink.textContent = "";
+        document.body.className = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
